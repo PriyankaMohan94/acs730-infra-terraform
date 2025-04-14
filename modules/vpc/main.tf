@@ -38,3 +38,40 @@ resource "aws_subnet" "private" {
     Name = "${var.project}-PrivateSubnet-${count.index + 1}"
   }
 }
+
+resource "aws_eip" "nat" {
+  vpc = true
+
+  tags = {
+    Name = "${var.project}-NAT-EIP"
+  }
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public[0].id
+  depends_on    = [aws_internet_gateway.igw]
+
+  tags = {
+    Name = "${var.project}-NATGW"
+  }
+}
+
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat.id
+  }
+
+  tags = {
+    Name = "${var.project}-PrivateRT"
+  }
+}
+
+resource "aws_route_table_association" "private" {
+  count          = length(aws_subnet.private[*].id)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private.id
+}
