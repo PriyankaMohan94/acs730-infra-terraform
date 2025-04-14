@@ -24,7 +24,7 @@ module "webservers" {
   ami_id              = "ami-0c101f26f147fa7fd"
   instance_type       = "t2.micro"
   subnet_ids          = [module.vpc.public_subnets[0], module.vpc.public_subnets[1]]
-  key_name            = "your-key-name"
+  key_name            = "acs730-key"
   security_group_ids  = [module.security_group.web_sg_id]
   project             = "Group1Dev-Webservers"
   assign_public_ip    = true
@@ -36,7 +36,7 @@ module "bastion" {
   ami_id              = "ami-0c101f26f147fa7fd"
   instance_type       = "t2.micro"
   subnet_ids          = [module.vpc.public_subnets[0]]
-  key_name            = "your-key-name"
+  key_name            = "acs730-key"
   security_group_ids  = [module.security_group.web_sg_id]
   project             = "Group1Dev-Bastion"
   assign_public_ip    = true
@@ -56,7 +56,7 @@ module "webserver4" {
   ami_id              = "ami-0c101f26f147fa7fd"
   instance_type       = "t2.micro"
   subnet_ids          = [module.vpc.public_subnets[1]]
-  key_name            = "your-key-name"
+  key_name            = "acs730-key"
   security_group_ids  = [module.security_group.web_sg_id]
   project             = "Group1Dev-Webserver4"
   assign_public_ip    = true
@@ -68,7 +68,7 @@ module "DBserver" {
   ami_id              = "ami-0c101f26f147fa7fd"
   instance_type       = "t2.micro"
   subnet_ids          = [module.vpc.private_subnets[0]]
-  key_name            = "your-key-name"
+  key_name            = "acs730-key"
   security_group_ids  = [module.security_group.web_sg_id]
   project             = "Group1Dev-Webserver5"
   assign_public_ip    = false
