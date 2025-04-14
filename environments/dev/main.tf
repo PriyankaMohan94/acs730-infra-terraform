@@ -41,6 +41,14 @@ module "bastion" {
   assign_public_ip    = true
 }
 
+module "alb" {
+  source            = "../../modules/alb"
+  project           = "Group1Dev"
+  alb_sg_id         = module.security_group.alb_sg_id
+  public_subnet_ids = module.vpc.public_subnets
+  vpc_id            = module.vpc.vpc_id
+  web_instance_ids  = module.webservers.instance_ids
+}
 module "webserver4" {
   source              = "../../modules/webserver"
   instance_count      = 1
