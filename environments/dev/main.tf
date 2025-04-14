@@ -11,6 +11,10 @@ module "vpc" {
   project              = "Group1Dev"
 }
 
+module "security_group" {
+  source  = "../../modules/security-group"
+  vpc_id  = module.vpc.vpc_id
+  project = "Group1Dev"
 module "webservers" {
   source              = "../../modules/webserver"
   instance_count      = 2
