@@ -31,7 +31,7 @@ module "webservers" {
   subnet_ids         = [module.vpc.public_subnets[0], module.vpc.public_subnets[2]]
   key_name           = "acs730-key"
   security_group_ids = [module.security_group.web_sg_id]
-  project            = "DevWebservers"
+  project            = "DevWebServers"
   assign_public_ip   = true
 }
 
@@ -63,7 +63,7 @@ module "webserver4" {
   subnet_ids         = [module.vpc.public_subnets[3]]
   key_name           = "acs730-key"
   security_group_ids = [module.security_group.web_sg_id]
-  project            = "DevWebserver4"
+  project            = "DevWebServer4"
   assign_public_ip   = true
 }
 
@@ -75,7 +75,7 @@ module "DBserver" {
   subnet_ids         = [module.vpc.private_subnets[0]]
   key_name           = "acs730-key"
   security_group_ids = [module.security_group.private_sg_id]
-  project            = "DevWebserver5"
+  project            = "DevDBServer"
   assign_public_ip   = false
 }
 
@@ -87,6 +87,6 @@ module "webserver6" {
   subnet_ids         = [module.vpc.private_subnets[1]]
   key_name           = "acs730-key"
   security_group_ids = [module.security_group.private_sg_id]
-  project            = "DevDBserver"
+  project            = "DevWebServer6"
   assign_public_ip   = false
 }
