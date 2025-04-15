@@ -1,5 +1,5 @@
 terraform {
-required_version = ">= 1.3.0"
+  required_version = ">= 1.3.0"
 
   required_providers {
     aws = {
@@ -7,7 +7,7 @@ required_version = ">= 1.3.0"
       version = "~> 5.0"
     }
   }
-  
+
   backend "s3" {
     bucket = "group1-dev-terraform-state"
     key    = "terraform.tfstate"
